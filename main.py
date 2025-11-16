@@ -14,6 +14,14 @@ import httpx
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+import ssl
+import os
+
+# Disable SSL verification for local development (macOS SSL certificate issue)
+# This is ONLY for local testing - production environments have proper certificates
+if os.getenv('PYTHONHTTPSVERIFY', '1') == '0':
+    ssl._create_default_https_context = ssl._create_unverified_context
+    logging.warning("SSL verification disabled - FOR DEVELOPMENT ONLY")
 
 # Import custom modules
 from config import settings
