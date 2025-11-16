@@ -262,7 +262,7 @@ async def clear_cache():
 @limiter.limit(settings.rate_limit_default)
 async def remove_background(
     request_data: BackgroundRemovalRequest,
-    req: Request,
+    request: Request,
     background_tasks: BackgroundTasks
 ):
     """
@@ -287,7 +287,7 @@ async def remove_background(
     start_time = time.time()
     
     # Get request ID from middleware
-    request_id = getattr(req.state, "request_id", "unknown")
+    request_id = getattr(request.state, "request_id", "unknown")
     
     try:
         # Validate image URL
@@ -411,7 +411,7 @@ async def remove_background(
 @limiter.limit("10/minute")
 async def remove_background_batch(
     image_urls: List[HttpUrl],
-    req: Request,
+    request: Request,
     format: str = "png",
     background_type: str = "rgba"
 ):
