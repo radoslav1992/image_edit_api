@@ -53,6 +53,7 @@ Transform your images with state-of-the-art AI technology. Remove backgrounds in
 - [Usage Examples](#-usage-examples)
 - [Testing](#-testing)
 - [Deployment](#-deployment)
+  - [**Deploy on Your KVM Server** 🎯](#deploy-on-your-kvm-server)
 - [Pricing](#-pricing)
 - [Contributing](#-contributing)
 - [Support](#-support)
@@ -383,39 +384,53 @@ curl http://localhost:8000/cache/stats
 
 ## 🚢 Deployment
 
-### Supported Platforms
+### 🎯 Deploy on Your KVM Server (Recommended!)
 
-- **Railway** ⭐ Recommended for beginners
-- **Heroku** - Simple git-based deployment
-- **DigitalOcean App Platform** - Great for production
-- **Google Cloud Run** - Serverless, auto-scaling
+**Got your own Hostinger KVM? Deploy there and save $120-240/year!**
+
+**5-Minute Deployment:**
+
+1. SSH: `ssh root@your-server-ip`
+2. Install Docker: `curl -fsSL https://get.docker.com | sh`
+3. Clone: `git clone https://github.com/radoslav1992/image_edit_api.git`
+4. Configure: Create `.env` with `REPLICATE_API_TOKEN`
+5. Start: `docker-compose up -d`
+
+**Setup HTTPS** (required for RapidAPI):
+```bash
+apt install nginx certbot python3-certbot-nginx -y
+certbot --nginx -d your-domain.com
+```
+
+📖 **Complete KVM Guide:** [DEPLOY_KVM.md](DEPLOY_KVM.md) ⭐  
+📖 **Detailed Guide:** [docs/DEPLOY_HOSTINGER_KVM.md](docs/DEPLOY_HOSTINGER_KVM.md)
+
+---
+
+### Alternative Cloud Platforms
+
+- **Railway** - Easy for beginners ($5-20/month)
+- **Heroku** - Git-based deployment ($7-25/month)
+- **DigitalOcean** - Production ready ($5-12/month)
+- **Google Cloud Run** - Serverless
 - **AWS Lambda** - Enterprise scale
-- **Docker** - Deploy anywhere
 
 ### Quick Deploy to Railway
 
 ```bash
-# Install Railway CLI
 npm install -g @railway/cli
-
-# Login and deploy
-railway login
-railway init
-railway up
+railway login && railway init && railway up
 ```
 
 ### Quick Deploy to Heroku
 
 ```bash
-# Install Heroku CLI
 brew install heroku/brew/heroku
-
-# Create and deploy
 heroku create your-app-name
 git push heroku main
 ```
 
-📖 **Full deployment guides:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+📖 **All deployment options:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ---
 
