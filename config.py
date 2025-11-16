@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     # File Validation
     max_image_size_mb: int = 10
     allowed_image_formats: list = ["jpg", "jpeg", "png", "webp", "gif"]
+    validate_image_urls: bool = True  # Set to False to skip URL validation (faster but less safe)
     
     # Webhook Configuration
     webhook_enabled: bool = True

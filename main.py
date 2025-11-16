@@ -290,9 +290,12 @@ async def remove_background(
     request_id = getattr(request.state, "request_id", "unknown")
     
     try:
-        # Validate image URL
-        logger.info(f"Validating image: {request_data.image_url}")
-        image_validator.validate_image_url(str(request_data.image_url))
+        # Validate image URL (if enabled)
+        if settings.validate_image_urls:
+            logger.info(f"Validating image: {request_data.image_url}")
+            image_validator.validate_image_url(str(request_data.image_url))
+        else:
+            logger.debug(f"Skipping URL validation for: {request_data.image_url}")
         
         # Validate format
         output_format = image_validator.validate_format(request_data.format)

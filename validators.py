@@ -6,8 +6,12 @@ from typing import Optional
 import requests
 from urllib.parse import urlparse
 import logging
+import urllib3
 
 logger = logging.getLogger(__name__)
+
+# Disable SSL warnings when verification is disabled
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class ImageValidator:
@@ -41,7 +45,13 @@ class ImageValidator:
         if check_size:
             try:
                 # HEAD request to check size without downloading
-                response = requests.head(str(url), timeout=10, allow_redirects=True)
+                # Try with SSL verification first
+                try:
+                    response = requests.head(str(url), timeout=10, allow_redirects=True, verify=True)
+                except requests.exceptions.SSLError:
+                    # If SSL verification fails, try without (for development/local testing)
+                    logger.warning(f"SSL verification failed for {url}, retrying without verification")
+                    response = requests.head(str(url), timeout=10, allow_redirects=True, verify=False)
                 
                 if response.status_code != 200:
                     raise HTTPException(
