@@ -1,0 +1,20 @@
+# Core Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Replicate Integration
+replicate==0.22.0
+
+# Configuration & Environment
+python-dotenv==1.0.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Rate Limiting
+slowapi==0.1.9
+
+# HTTP Client for webhooks
+httpx==0.25.1
+
+# Additional utilities
+requests==2.31.0
